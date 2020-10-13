@@ -35,7 +35,7 @@ class Raiden:
             "CMD_BUILDTIME":77,
             "CMD_INVERT_TRIGGER":78,
             "CMD_RESET_TARGET":79,
-            "CMD_CLK_GEN": 80
+            "CMD_GPIO_OUT": 80
         }
         
         self.device = serial.Serial(serial_dev, baudrate= baud, timeout=2.5, writeTimeout=2.5)
@@ -74,6 +74,7 @@ class Raiden:
             ord(raw) == self._commands["CMD_FORCE_GLITCH_OUT_STATE"] or 
             ord(raw) == self._commands["CMD_RST"] or
             ord(raw) == self._commands["CMD_INVERT_TRIGGER"] or
+            ord(raw) == self._commands["CMD_GPIO_OUT"] or
             ord(raw) == self._commands["CMD_RST_GLITCHER"]):
 
             data = struct.pack(">B", value)
@@ -114,7 +115,7 @@ class Raiden:
         :param seconds: FPGA ticks or seconds
         :param value: value for CMD_GLITCH_COUNT, CMD_VSTART, CMD_GLITCH_MAX
         """
-        if(param == "CMD_GLITCH_COUNT" or param == "CMD_VSTART" or param == "CMD_GLITCH_MAX" or param == "CMD_INVERT_TRIGGER"):
+        if(param == "CMD_GLITCH_COUNT" or param == "CMD_VSTART" or param == "CMD_GLITCH_MAX" or param == "CMD_INVERT_TRIGGER" or param == "CMD_GPIO_OUT"):
             self.__raiden_cmd(self.device, self._commands[param], int(value))
             return
         if(self.ticks):
@@ -159,7 +160,8 @@ class Raiden:
           flags[2] finished    - glitching has completed
           flags[3] glitch_out  - current state of glitch out
           flags[4] trigger_in  - current state of trigger in
-          flags[5] gpio - current GPIO status
+          flags[5] gpio_in - current GPIO_IN status
+          flags[6] gpio_out - current GPIO_OUT status
         """
         return self.__raiden_cmd(self.device, self._commands["CMD_FLAGS_STATUS"])
 
@@ -202,12 +204,19 @@ class Raiden:
         :return 0 if external trigger is LOW and 1 if HIGH
         """
         return ((self.flag_status() >> 4) & 0x01)
-    def is_gpio_high(self):
+   
+    def is_gpio_in_high(self):
         """
         :return 0 if GPIO is not HIGH, else return 1
         """
         return ((self.flag_status()>>5) & 0x01)
-    
+
+    def gpio_out_status(self):
+        """
+        return 0 if GPIO LOW or 1 if GPIO HIGH
+        """
+        return ((self.flag_status()>>6) &0x01)
+
     def reset_glitcher(self):
         """
         Reset Raiden modules to default values
