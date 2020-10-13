@@ -7,7 +7,7 @@ import random
 import phywhisperer.usb as pw
 from chipshouter import ChipSHOUTER
 import time
-from raiden-python import raiden
+from raiden_python import raiden
 import usb.core
 import usb.control
 import usb.util

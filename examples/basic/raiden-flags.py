@@ -1,4 +1,4 @@
-from raiden-python import raiden
+from raiden_python import raiden
 import argparse
 import serial
 import time

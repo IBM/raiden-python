@@ -1,4 +1,4 @@
-from raiden-python import raiden 
+from raiden_python import raiden 
 import time
 raiden = raiden.Raiden(mhz=100, serial_dev="/dev/lab_raiden", baud= 115200, ticks= True) 
 
