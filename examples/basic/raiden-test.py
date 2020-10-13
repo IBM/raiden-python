@@ -1,4 +1,4 @@
-from raiden_gen import raiden
+from raiden-python import raiden
 import argparse
 
 parser = argparse.ArgumentParser()

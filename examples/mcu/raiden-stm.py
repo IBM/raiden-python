@@ -2,7 +2,7 @@ from collections import namedtuple
 from tqdm import tnrange
 import sys
 
-from raiden_gen import raiden
+from raiden-python import raiden
 
 delay = 0
 Range = namedtuple('Range', ['min', 'max', 'step'])
