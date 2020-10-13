@@ -1,5 +1,9 @@
 # Raiden python API
 
+#### clone repository
+```
+git clone git@github.com:IBM/raiden-python.git 
+```
 
 #### Install raiden package
 ```
