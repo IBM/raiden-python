@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='raiden_python',
-    version='1.0.1',    
+    version='1.0.2',    
     description='Raiden api',
     url='',
     author='Grzegorz Wypych (h0rac) & Adam Laurie (M@jor Malfunction)',

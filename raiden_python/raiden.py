@@ -161,7 +161,8 @@ class Raiden:
           flags[3] glitch_out  - current state of glitch out
           flags[4] trigger_in  - current state of trigger in
           flags[5] gpio_in - current GPIO_IN status
-          flags[6] gpio_out - current GPIO_OUT status
+          flags[6] gpio1_out - current GPIO1_OUT status
+          flags[7] gpio2_out - current GPIO2_OUT status
         """
         return self.__raiden_cmd(self.device, self._commands["CMD_FLAGS_STATUS"])
 
@@ -205,11 +206,17 @@ class Raiden:
         """
         return ((self.flag_status() >> 4) & 0x01)
    
-    def is_gpio_in_high(self):
+    def is_gpio1_in_high(self):
         """
         :return 0 if GPIO is not HIGH, else return 1
         """
         return ((self.flag_status()>>5) & 0x01)
+
+    def is_gpio2_in_high(self):
+        """
+        :return 0 if GPIO is not HIGH, else return 1
+        """
+        return ((self.flag_status()>>7) & 0x01)
 
     def gpio_out_status(self):
         """
