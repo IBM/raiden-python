@@ -93,7 +93,6 @@ class Raiden:
             ord(raw) == self._commands["CMD_GLITCH_COUNT"] or
             ord(raw) == self._commands["CMD_GLITCH_GAP"] or
             ord(raw) == self._commands["CMD_GLITCH_MAX"] or
-            ord(raw) == self._commands["CMD_CLK_GEN"] or
             ord(raw) == self._commands["CMD_RESET_TARGET"]):
 
             data = struct.pack(">I", value)
