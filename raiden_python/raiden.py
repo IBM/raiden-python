@@ -106,7 +106,7 @@ class Raiden:
             return
         return
 
-    def set_param(self, param="CMD_GLITCH_DELAY", seconds=0, value=1):
+    def set_param(self, param="CMD_GLITCH_DELAY", value=1):
         """
         Set glitching params before arming Raiden.
 
@@ -118,9 +118,9 @@ class Raiden:
             self.__raiden_cmd(self.device, self._commands[param], int(value))
             return
         if(self.ticks):
-            fpga_ticks= int(seconds)
+            fpga_ticks= int(value)
         else:
-            fpga_ticks= math.ceil(self._hz * seconds)
+            fpga_ticks= math.ceil(self._hz * value)
         self.__raiden_cmd(self.device, self._commands[param], fpga_ticks)
     
     def arm(self, value=1):
