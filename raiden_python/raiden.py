@@ -35,7 +35,8 @@ class Raiden:
             "CMD_BUILDTIME":77,
             "CMD_INVERT_TRIGGER":78,
             "CMD_RESET_TARGET":79,
-            "CMD_GPIO_OUT": 80
+            "CMD_GPIO_OUT": 80,
+            "CMD_EMMC_DATA": 81        
         }
         
         self.device = serial.Serial(serial_dev, baudrate= baud, timeout=2.5, writeTimeout=2.5)
@@ -93,6 +94,7 @@ class Raiden:
             ord(raw) == self._commands["CMD_GLITCH_COUNT"] or
             ord(raw) == self._commands["CMD_GLITCH_GAP"] or
             ord(raw) == self._commands["CMD_GLITCH_MAX"] or
+            ord(raw) == self._commands["CMD_EMMC_DATA"] or
             ord(raw) == self._commands["CMD_RESET_TARGET"]):
 
             data = struct.pack(">I", value)
