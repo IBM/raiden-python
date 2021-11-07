@@ -37,7 +37,7 @@ class Raiden:
             "CMD_RESET_TARGET":79,
             "CMD_GPIO_OUT": 80,
             "CMD_UART_TRIGGER":81,
-            "CMD_UART_TRIGGER_BAUD":82
+            "CMD_UART_TRIGGER_BAUD":64
         }
         
         self.device = serial.Serial(serial_dev, baudrate= baud, timeout=2.5, writeTimeout=2.5)
