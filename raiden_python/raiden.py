@@ -35,7 +35,8 @@ class Raiden:
             "CMD_BUILDTIME":77,
             "CMD_INVERT_TRIGGER":78,
             "CMD_RESET_TARGET":79,
-            "CMD_GPIO_OUT": 80
+            "CMD_GPIO_OUT": 80,
+            "CMD_UART_TRIGGER":81
         }
         
         self.device = serial.Serial(serial_dev, baudrate= baud, timeout=2.5, writeTimeout=2.5)
@@ -75,6 +76,7 @@ class Raiden:
             ord(raw) == self._commands["CMD_RST"] or
             ord(raw) == self._commands["CMD_INVERT_TRIGGER"] or
             ord(raw) == self._commands["CMD_GPIO_OUT"] or
+            ord(raw) == self._commands["CMD_UART_TRIGGER"] or
             ord(raw) == self._commands["CMD_RST_GLITCHER"]):
 
             data = struct.pack(">B", value)
