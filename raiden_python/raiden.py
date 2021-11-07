@@ -36,7 +36,8 @@ class Raiden:
             "CMD_INVERT_TRIGGER":78,
             "CMD_RESET_TARGET":79,
             "CMD_GPIO_OUT": 80,
-            "CMD_UART_TRIGGER":81
+            "CMD_UART_TRIGGER":81,
+            "CMD_UART_TRIGGER_BAUD":82
         }
         
         self.device = serial.Serial(serial_dev, baudrate= baud, timeout=2.5, writeTimeout=2.5)
@@ -95,6 +96,7 @@ class Raiden:
             ord(raw) == self._commands["CMD_GLITCH_COUNT"] or
             ord(raw) == self._commands["CMD_GLITCH_GAP"] or
             ord(raw) == self._commands["CMD_GLITCH_MAX"] or
+            ord(raw) == self._commands["CMD_UART_TRIGGER_BAUD"] or
             ord(raw) == self._commands["CMD_RESET_TARGET"]):
 
             data = struct.pack(">I", value)
@@ -116,7 +118,7 @@ class Raiden:
         :param seconds: FPGA ticks or seconds
         :param value: value for CMD_GLITCH_COUNT, CMD_VSTART, CMD_GLITCH_MAX
         """
-        if(param == "CMD_GLITCH_COUNT" or param == "CMD_VSTART" or param == "CMD_GLITCH_MAX" or param == "CMD_INVERT_TRIGGER" or param == "CMD_GPIO_OUT"):
+        if(param == "CMD_GLITCH_COUNT" or param == "CMD_VSTART" or param == "CMD_GLITCH_MAX" or param == "CMD_INVERT_TRIGGER" or param == "CMD_GPIO_OUT" or param =="CMD_UART_TRIGGER_BAUD"):
             self.__raiden_cmd(self.device, self._commands[param], int(value))
             return
         if(self.ticks):
