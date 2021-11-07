@@ -118,7 +118,7 @@ class Raiden:
         :param seconds: FPGA ticks or seconds
         :param value: value for CMD_GLITCH_COUNT, CMD_VSTART, CMD_GLITCH_MAX
         """
-        if(param == "CMD_GLITCH_COUNT" or param == "CMD_VSTART" or param == "CMD_GLITCH_MAX" or param == "CMD_INVERT_TRIGGER" or param == "CMD_GPIO_OUT" or param =="CMD_UART_TRIGGER_BAUD"):
+        if(param == "CMD_GLITCH_COUNT" or param == "CMD_VSTART" or param == "CMD_GLITCH_MAX" or param == "CMD_INVERT_TRIGGER" or param == "CMD_GPIO_OUT"):
             self.__raiden_cmd(self.device, self._commands[param], int(value))
             return
         if(self.ticks):
